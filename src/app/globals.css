@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Font Weight Variables */
+  --font-weight-thin: 100;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Color Variables - Black Shades */
+  --color-black-10: #051912;
+  --color-black-9: #202926;
+  --color-black-8: #374741;
+  --color-black-7: #505e59;
+  --color-black-6: #697571;
+  --color-black-5: #828c88;
+  --color-black-4: #9ba3a0;
+  --color-text-primary: #1e302a;
+  --color-text-secondary: #505e59;
+  --color-text-dark: #0e121b;
+  --color-text-gray: #6f6f6f;
+  --color-text-tooltip: #525866;
+
+  /* Color Variables - Status Colors */
+  --color-success: #156548;
+  --color-success-trend: #0fad14;
+  --color-error: #da2a46;
+  --color-info: #335cff;
+  --color-warning: #ff8447;
+
+  /* Color Variables - Background */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #eef3f1;
+  --color-bg-success-light: #eff7f3;
+  --color-bg-hover: #f4f6f5;
+  --color-bg-green: #f2f7f5;
+  --color-bg-input: #f5f7f6;
+  --color-bg-section: rgba(255, 255, 255, 0.6);
+  --color-bg-input-field: rgba(255, 255, 255, 0.7);
+  --color-bg-tooltip: #f2f5f8;
+  --color-toggle-active: #335cff;
+  --color-toggle-inactive: #e1e4ea;
+
+  /* Color Variables - Border */
+  --color-border-primary: #e6e8e7;
+  --color-border-green: #98cdb8;
+  --color-bg-green-strong: #6fb99c;
+  --color-border-divider: #b4bab8;
+  --color-border-accent: #add7c7;
+  --color-border-input: #cdd1d0;
+  --color-border-card-active: #d6ebe3;
+
+  /* Color Variables - Badge */
+  --color-badge-info-bg: #dfe8ff;
+  --color-badge-info-text: #335cff;
+  --color-badge-warning-bg: #ffece0;
+  --color-badge-warning-text: #ff8447;
+  --color-badge-pending-bg: #ede6ff;
+  --color-badge-pending-text: #5940c3;
+
+  /* Color Variables - Accent */
+  --color-accent-cyan: #3bd8ff;
+  --color-accent-purple: #e0ddff;
+  --color-accent-purple-dark: #4b3ca5;
+
+  /* Gradients */
+  --gradient-icon: radial-gradient(
+    circle at 63.38% -7.95%,
+    #319b72 0%,
+    #20654a 16.54%,
+    #184a36 24.81%,
+    #102f23 33.08%,
+    #184a36 49.21%,
+    #20654a 65.34%,
+    #319b72 97.6%
+  );
+
+  --gradient-text: linear-gradient(
+    to right bottom,
+    #319b72 0%,
+    #000000 16.54%,
+    #000000 24.81%,
+    #102f23 33.08%,
+    #000000 49.21%,
+    #1b553e 65.34%,
+    #319b72 90%
+  );
+  --gradient-text-gray: linear-gradient(
+    to right bottom,
+    var(--color-black-7) 0%,
+    #000000 16.54%,
+    #000000 24.81%,
+    #102f23 33.08%,
+    #000000 49.21%,
+    var(--color-black-7) 65.34%,
+    var(--color-black-4) 90%
+  );
+
+  /* body gradient */
+  --body-gradient: radial-gradient(
+    124.81% 124.81% at 50% 124.81%,
+    #fff 73.57%,
+    #eaf5f1 93.99%,
+    #f0f8f5 100%
+  );
+}
+
+html,
+body {
+  background-color: #ffffff;
+}
+
+.text-h1-narrow {
+  text-align: center;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -0.1rem;
+}
+
+.text-h2 {
+  font-size: 28px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -1.12px;
+}
+
+.text-h4 {
+  font-size: 24px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.72px;
+}
+
+.text-h5 {
+  font-size: 20px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.6px;
+}
+
+/* Figma Text Styles - Body */
+.text-b1 {
+  font-size: 18px;
+  line-height: auto;
+  font-weight: 400;
+  letter-spacing: -0.72px;
+}
+
+.text-b1-med {
+  font-size: 18px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.72px;
+}
+
+.text-b2-bold,
+.text-b2 {
+  color: var(--color-black-7);
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.02rem;
+}
+
+.text-b2-bold {
+  color: var(--color-black-9);
+  font-weight: 500;
+}
+
+.text-b2-med {
+  font-size: 16px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+}
+
+.text-b4 {
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 400;
+  letter-spacing: -0.56px;
+}
+
+.text-b4-med {
+  font-size: 14px;
+  line-height: auto;
+  font-weight: 500;
+  letter-spacing: -0.56px;
+}
+
+.text-b5 {
+  color: var(--color-black-8);
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 0.875rem */
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+/* Utility text colors using CSS variables */
+.text-color-black-10 {
+  color: var(--color-black-10);
+}
+
+.text-link-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-link-secondary:hover {
+  color: var(--color-text-primary);
+}
+
+@keyframes onboarding-anim {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes onboarding-anim-2 {
+  0% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bg-scale {
+  0% {
+    background-size: 200%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
+.onboarding-anim-2 {
+  animation: onboarding-anim-2 1s ease forwards;
+}
+
+.onboarding-anim {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: onboarding-anim 3s ease forwards;
+}
