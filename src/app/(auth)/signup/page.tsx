@@ -11,6 +11,11 @@ import LargeInput from "@/src/components/Inputs/LargeInputs";
 import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
 import HyperLinkTexts from "@/src/components/Texts/HyperLinkTexts";
 import { AppleIcon, FaceBookIcon, GoogleIcon } from "@/src/lib/utilities/icons";
+import { useMutation } from "@tanstack/react-query";
+import axiosInstance from "@/src/lib/axios/axiosConfig";
+import { toast } from "react-toastify";
+
+
 
 // --- Validation Schema ---
 const signupSchema = z.object({
@@ -30,10 +35,33 @@ export default function SignupPage() {
     resolver: zodResolver(signupSchema),
   });
 
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: SignupFormData) => {
+      return axiosInstance.post("/auth/signup", data);
+    },
+    onSuccess: (res) => {
+      toast.success("Otp Send Successfully");
+      const user = res?.data?.user;
+      console.log(res?.data, "data");
+      // Store user in localStorage so it survives navigation
+      if (user && typeof window !== "undefined") {
+        localStorage.setItem("pendingUser", JSON.stringify(user));
+      }
+      router.push("/otp-verification");
+    },
+    onError: (error: any) => {
+      // Handle case where error may not have .response
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "An error occurred. Please try again.";
+      toast.error(message);
+    },
+  });
+
   const onSubmit = (data: SignupFormData) => {
-    // No API call for now; just log and navigate using Next.js router
-    console.log("Signup data:", data);
-    router.push("/otp-verification");
+    mutate(data);
   };
 
   return (
