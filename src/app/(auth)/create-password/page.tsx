@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 // Import your custom icons
 import axiosInstance from "@/src/lib/axios/axiosConfig";
 import { useEffect } from "react";
-import LayoutWrapper from "../components/LayoutWrapper";
+import LayoutWrapper from "@/src/components/Layout/LayoutWrapper";
 import HeadingGradientTextsGreen from "@/src/components/Texts/HeadingGradientTexts";
 import LargeInput from "@/src/components/Inputs/LargeInputs";
 import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
@@ -53,7 +53,12 @@ export default function CreatePasswordPage() {
   const { mutate, isPending } = {mutate: () => {}, isPending: false};
 
   const onSubmit = (data: SetupPasswordFormData) => {
-    console.log(data);
+    console.log("Form submitted with data:", data);
+    router.push("/onboarding");
+  };
+
+  const onError = (errors: any) => {
+    console.log("Form validation errors:", errors);
   };
 
   return (
@@ -70,7 +75,7 @@ export default function CreatePasswordPage() {
 
         {/* Form Section */}
         <div className="w-full space-y-6">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-5">
             {/* Password Field */}
             <LargeInput
               type="password"
@@ -86,7 +91,7 @@ export default function CreatePasswordPage() {
             <LargeInput
               type="password"
               placeholder="Confirm Password"
-              error={errors.password}
+              error={errors.confirmPassword}
               // passing validation via register
               {...register("confirmPassword", {
                 required: "Confirm Password is required",

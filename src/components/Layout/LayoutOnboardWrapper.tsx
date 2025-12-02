@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import LayoutOnboardFooter from "./LayoutOnboardFooter";
+import LayoutOnboardFooter from "../../app/(onboarding)/onboarding/components/layoutOnBoardFooter";
 import OnboardingAnimation from "./OnboardingAnimation";
 import LayoutOnboardingHeader from "./LayoutOnboardingHeader";
 

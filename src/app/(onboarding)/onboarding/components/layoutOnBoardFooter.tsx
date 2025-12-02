@@ -4,7 +4,7 @@ import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
 import { LightGreenBtn } from "@/src/components/Buttons/LightGreenButton";
 import { LeftArrowIcon, RightArrowIcon } from "@/src/lib/utilities/icons";
 import { useRouter } from "next/navigation";
-import LinkSection from "@/src/app/(auth)/footer/LinkSection";
+import LinkSection from "@/src/components/footer/LinkSection";
 import Image from "next/image";
 
 const IMAGES = ["/assets/images/footerIllustration-1.svg", "/assets/images/footerIllustration-2.svg", "/assets/images/footerIllustration-3.svg"];
@@ -19,12 +19,13 @@ function LayoutOnboardFooter() {
 
   const isOnBoarded = false;
   const router = useRouter();
-const pathNum = 0;
+let pathNum = 0;
 
   const handleNext = () => {
     // If we are not at the last step, go to the next one
     if (pathNum < ONBOARDING_STEPS.length - 1) {
-      router.push(ONBOARDING_STEPS[pathNum + 1]);
+      pathNum++;
+      router.push(ONBOARDING_STEPS[pathNum]);
     } else {
       // Logic for the final step (e.g., navigate to dashboard)
       router.push("/dashboard");
@@ -34,7 +35,8 @@ const pathNum = 0;
   const handleBack = () => {
     // Explicitly navigate to the previous step in the list
     if (pathNum > 0) {
-      router.push(ONBOARDING_STEPS[pathNum - 1]);
+      pathNum--;
+      router.push(ONBOARDING_STEPS[pathNum]);
     }
   };
 

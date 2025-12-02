@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode, useEffect, useState } from "react";
-import LayoutOnboardFooter from "./components/layoutOnBoardFooter";
+import LayoutOnboardingFooter from "./components/layoutOnBoardFooter";
 import OnboardingAnimation from "./components/OnboardingAnimation";
 import LayoutOnboardingHeader from "./components/LayoutOnboardingHeader";
 
@@ -54,7 +54,7 @@ export default function LayoutOnboardWrapper({
           <LayoutOnboardingHeader num={pathNum + 1} />
           {children}
           {/* TODO: replace hard-coded 2 with the last onboarding step index when wiring real routing */}
-          {pathNum !== ONBOARDING_STEPS.length - 1 && <LayoutOnboardFooter />}
+          {pathNum !== ONBOARDING_STEPS.length - 1 && <LayoutOnboardingFooter />}
         </>
       )}
     </div>

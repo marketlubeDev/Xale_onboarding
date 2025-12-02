@@ -6,7 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 
-import LayoutWrapper from "../components/LayoutWrapper";
+import LayoutWrapper from "@/src/components/Layout/LayoutWrapper";
 // Ensure this path matches your file structure exactly
 import HeadingGradientTextsGreen from "@/src/components/Texts/HeadingGradientTexts";
 import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
@@ -112,6 +112,7 @@ export default function OTPPage() {
   };
 
   const onSubmit = (data: OtpFormData) => {
+    router.push("/create-password");
   };
 
   let isPending = false;

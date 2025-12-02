@@ -1,6 +1,6 @@
 "use client";
 
-import LayoutWrapper from "../components/LayoutWrapper";
+import LayoutWrapper from "@/src/components/Layout/LayoutWrapper";
 import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
 import HeadingGradientTextsGreen from "@/src/components/Texts/HeadingGradientTexts";
 import LargeInput from "@/src/components/Inputs/LargeInputs";
