@@ -7,6 +7,8 @@ import OnBoardingDropDown from "../../../components/Layout/OnBoardingDropDown";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { usePreventBack } from "@/src/hooks/usePreventBack";
+import { useSelector } from "react-redux";
 
 const onBoardingSchema = z.object({
   companyName: z.string().min(1, "Please enter your company name"),
@@ -16,7 +18,8 @@ const onBoardingSchema = z.object({
 type OnboardingFormData = z.infer<typeof onBoardingSchema>;
 
 export default function OnBoarding() {
-  const isOnBoarded = false;
+  usePreventBack();
+  const {isOnBoarded } = useSelector( (state: { basic: { isOnBoarded: boolean | null } }) => state.basic);
   const {
     register,
     formState: { errors },

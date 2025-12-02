@@ -4,6 +4,8 @@ import LayoutOnboardingFooter from "../../../components/Layout/layoutOnBoardingF
 import OnboardingAnimation from "../../../components/Layout/OnboardingAnimation";
 import LayoutOnboardingHeader from "../../../components/Layout/LayoutOnboardingHeader";
 import { useGetPathNum } from "@/src/hooks/useGetPathNum";
+import { useDispatch, useSelector  } from "react-redux";
+import { setIsOnBoarded } from "@/src/lib/features/basicSlice";
 
 // Define your onboarding steps in order
 export const ONBOARDING_STEPS = [
@@ -20,25 +22,34 @@ export default function LayoutOnboardWrapper({
   children,
 }: LayoutOnboardWrapperProps) {
   const [isAnimation, setIsAnimation] = useState(true);
-  const isOnBoarded = false;
-  const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
+  const {isOnBoarded } = useSelector( (state: { basic: { isOnBoarded: boolean | null } }) => state.basic);
+  const dispatch = useDispatch();
+
+  
+
   useEffect(() => {
     if (isOnBoarded) return;
     const timeoutId = setTimeout(() => {
       setIsAnimation(false);
-      const onBoardedTimeoutId = setTimeout(() => {}, 1500);
-      // Clean up the second timeout as well
+      const onBoardedTimeoutId = setTimeout(
+        () => dispatch(setIsOnBoarded(true)),
+        1500
+      );
       return () => clearTimeout(onBoardedTimeoutId);
     }, 3000);
 
     return () => clearTimeout(timeoutId);
   }, []);
 
+  const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
+
+
+
   useEffect(() => {
     if (pathNum !== 0 && pathNum !== -1 && !isOnBoarded) {
-      // Add any redirect or side-effect logic here if needed
+      dispatch(setIsOnBoarded(true));
     }
-  }, [pathNum, isOnBoarded]);
+  }, [pathNum]);
 
   return (
     <div
@@ -53,7 +64,6 @@ export default function LayoutOnboardWrapper({
         <>
           <LayoutOnboardingHeader num={pathNum + 1} />
           {children}
-          {/* TODO: replace hard-coded 2 with the last onboarding step index when wiring real routing */}
           {pathNum !== ONBOARDING_STEPS.length - 1 && <LayoutOnboardingFooter />}
         </>
       )}
