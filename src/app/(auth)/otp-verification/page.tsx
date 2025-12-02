@@ -12,6 +12,10 @@ import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
 import Timer from "./components/Timer";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import axiosInstance from "@/src/lib/axios/axiosConfig";
+import { useDispatch } from "react-redux";
+import { setTokenAndUser } from "@/src/lib/features/authSlice";
 
 // --- Validation Schema ---
 const otpSchema = z.object({
@@ -21,9 +25,11 @@ const otpSchema = z.object({
 
 type OtpFormData = z.infer<typeof otpSchema>;
 
+
+
 export default function OTPPage() {
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const [user, setUser] = useState<{ email: string; profileCompletion?: number } | null>(null);
   const [loading, setLoading] = useState<boolean>(true); // <-- FIX: avoid redirect before hydration
   const [otpArray, setOtpArray] = useState<string[]>(new Array(6).fill(""));
@@ -62,6 +68,9 @@ export default function OTPPage() {
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+
+  console.log(otpArray , "otpArray");
+
   const {
     handleSubmit,
     setValue,
@@ -75,9 +84,59 @@ export default function OTPPage() {
     },
   });
 
-  const resendOtp = () => {
-    toast.info("OTP sent again.");
-  };
+  const { mutate: submitOtp, isPending } = useMutation({
+    mutationFn: (data: OtpFormData) => {
+      return axiosInstance.post("/auth/validate-signup-otp", {
+        email: user?.email || "",
+        otp: data?.otp || "",
+      });
+    },
+    onSuccess: (response) => {
+      const token = response?.data?.token;
+      const userData = response?.data?.data?.user;
+
+      dispatch(
+        setTokenAndUser({
+          token,
+          user: userData,
+        })
+      );
+      if (userData?.profileCompletion > 0) {
+        router.push("/onboarding");
+      } else {
+        router.push("/create-password");
+        toast.success("Email Verified Successfully!");
+      }
+    },
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Invalid OTP. Please try again.";
+      toast.error(message);
+    },
+  });
+
+  const { mutate: resendOtp, isPending: isResending } = useMutation({
+    mutationFn: () => {
+      return axiosInstance.post("/auth/otp-send-again", {
+        email: user?.email || "",
+      });
+    },
+    onSuccess: () => {
+      toast.success("Code resent successfully!");
+      setTimer(30);
+    },
+    onError: (error: any) => {
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Failed to resend code. Please try again.";
+      toast.error(message);
+    },
+  });
+
+
 
   useEffect(() => {
     const otpString = otpArray.join("");
@@ -94,6 +153,9 @@ export default function OTPPage() {
     const newOtp = [...otpArray];
     newOtp[index] = element.value;
     setOtpArray(newOtp);
+
+
+
 
     if (element.value && index < 5) {
       inputRefs.current[index + 1]?.focus();
@@ -121,11 +183,13 @@ export default function OTPPage() {
     }
   };
 
-  const onSubmit = (data: OtpFormData) => {
-    router.push("/create-password");
-  };
 
-  let isPending = false;
+
+
+  const onSubmit = (data: OtpFormData) => {
+    console.log("data in onSubmit", data);
+    submitOtp(data);
+  };
 
   // Prevent UI flash before loading
   if (loading) {
@@ -137,6 +201,7 @@ export default function OTPPage() {
       </LayoutWrapper>
     );
   }
+
 
   return (
     <LayoutWrapper>
@@ -207,10 +272,10 @@ export default function OTPPage() {
             <button
               type="button"
               onClick={() => resendOtp()}
-              disabled={isPending}
-              className="font-medium text-var(--color-black-10) underline hover:text-black transition-colors"
+              disabled={isResending}
+              className="font-medium text-var(--color-black-10) underline hover:text-black transition-colors disabled:opacity-50 disabled:cursor-wait"
             >
-              {isPending ? "Resending..." : "Resend code"}
+              {isResending ? "Resending..." : "Resend code"}
             </button>
           </Timer>
         </form>
@@ -218,3 +283,4 @@ export default function OTPPage() {
     </LayoutWrapper>
   );
 }
+
