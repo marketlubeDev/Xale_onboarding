@@ -7,7 +7,35 @@ import LargeInput from "@/src/components/Inputs/LargeInputs";
 import HyperLinkTexts from "@/src/components/Texts/HyperLinkTexts";
 import { AppleIcon, FaceBookIcon, GoogleIcon } from "@/src/lib/utilities/icons";
 
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+
+const loginSchema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+  password: z.string().min(1, "Password is required"),
+});
+
+type LoginFormData = z.infer<typeof loginSchema>;
+
 export default function LoginPage() {
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = (data: LoginFormData) => {
+    // TODO: hook up real API
+    console.log("login data", data);
+    router.push("/onboarding");
+  };
+
   return (
     <LayoutWrapper>
       {/* Main Content Content Wrapper */}
@@ -19,19 +47,31 @@ export default function LoginPage() {
           style={{ marginBottom: "5rem" }}
         />
 
-        {/* Form Section (UI only) */}
+        {/* Form Section */}
         <div className="w-full space-y-6 ">
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* Email Field */}
             <LargeInput
               type="email"
               placeholder="Enter email"
+              error={errors.email}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^\S+@\S+$/,
+                  message: "Invalid email",
+                },
+              })}
             />
 
             {/* Password Field */}
             <LargeInput
               type="password"
               placeholder="Enter password"
+              error={errors.password}
+              {...register("password", {
+                required: "Password is required",
+              })}
             />
 
             {/* Forgot Password Link */}
@@ -40,6 +80,7 @@ export default function LoginPage() {
                 Forgot Password?
               </HyperLinkTexts>
             </div>
+
             {/* Submit Button - Black Pill Shape */}
             <PrimaryButton
               type="submit"
@@ -47,6 +88,7 @@ export default function LoginPage() {
             >
               Login
             </PrimaryButton>
+
             <div className="flex justify-center">
               <HyperLinkTexts href="signup">Login With OTP</HyperLinkTexts>
             </div>
