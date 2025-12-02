@@ -1,6 +1,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import "../../sass/main.scss";
+import QueryProvider from "../providers/QueryProvider";
+import ToastProvider from "../providers/ToastProvider";
 
 export const metadata = {
   title: "Xale",
@@ -91,7 +93,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={helveticaNeue.variable}>
-      <body className={helveticaNeue.className}>{children}</body>
+      <body className={helveticaNeue.className}>
+        <QueryProvider>
+          {children}
+          <ToastProvider />
+        </QueryProvider>
+      </body>
     </html>
   );
 }

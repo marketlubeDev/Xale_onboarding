@@ -11,6 +11,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import axiosInstance from "@/src/lib/axios/axiosConfig";
+import { toast } from "react-toastify";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -30,10 +33,30 @@ export default function LoginPage() {
     resolver: zodResolver(loginSchema),
   });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: LoginFormData) => {
+      return axiosInstance.post("/auth/login", data);
+    },
+    onSuccess: (_) => {
+      // Assuming response contains token/user info
+      toast.success("Welcome back!");
+      // Save token logic here if needed (e.g., localStorage.setItem('token', response.data.token))
+      router.push("/");
+    },
+    onError: (error: any) => {
+      console.log("error in login", error);
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Invalid credentials. Please try again.";
+      toast.error(message);
+    },
+  });
+
   const onSubmit = (data: LoginFormData) => {
     // TODO: hook up real API
-    console.log("login data", data);
-    router.push("/onboarding");
+ 
+    mutate(data);
   };
 
   return (
