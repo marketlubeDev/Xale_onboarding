@@ -1,8 +1,8 @@
 "use client";
 import { ReactNode, useEffect, useState } from "react";
-import LayoutOnboardingFooter from "./components/layoutOnBoardFooter";
-import OnboardingAnimation from "./components/OnboardingAnimation";
-import LayoutOnboardingHeader from "./components/LayoutOnboardingHeader";
+import LayoutOnboardingFooter from "../../../components/Layout/layoutOnBoardingFooter";
+import OnboardingAnimation from "../../../components/Layout/OnboardingAnimation";
+import LayoutOnboardingHeader from "../../../components/Layout/LayoutOnboardingHeader";
 
 // Define your onboarding steps in order
 export const ONBOARDING_STEPS = [

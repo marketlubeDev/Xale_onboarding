@@ -15,7 +15,7 @@ export const ONBOARDING_STEPS = [
     "/onboarding/select-plan",
   ];
 
-function LayoutOnboardFooter() {
+function LayoutOnboardingFooter() {
 
   const isOnBoarded = false;
   const router = useRouter();
@@ -100,4 +100,4 @@ let pathNum = 0;
   );
 }
 
-export default LayoutOnboardFooter;
+export default LayoutOnboardingFooter;

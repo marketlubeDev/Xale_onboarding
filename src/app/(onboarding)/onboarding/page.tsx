@@ -3,7 +3,7 @@
 import { Catagory, CompanyIcon } from "@/src/lib/utilities/icons";
 import HeadingGradientTextsGreen from "@/src/components/Texts/HeadingGradientTexts";
 import OnBoardingInputs from "./components/onBoardingInput";
-import OnBoardingDropDown from "./components/OnBoardingDropDown";
+import OnBoardingDropDown from "../../../components/Layout/OnBoardingDropDown";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
