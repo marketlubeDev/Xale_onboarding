@@ -6,8 +6,13 @@ import { LeftArrowIcon, RightArrowIcon } from "@/src/lib/utilities/icons";
 import { useRouter } from "next/navigation";
 import LinkSection from "@/src/components/footer/LinkSection";
 import Image from "next/image";
+import { useGetPathNum } from "@/src/hooks/useGetPathNum";
 
-const IMAGES = ["/assets/images/footerIllustration-1.svg", "/assets/images/footerIllustration-2.svg", "/assets/images/footerIllustration-3.svg"];
+const footerIllustration1 = "/assets/images/footerIllustration-1.svg";
+const footerIllustration2 = "/assets/images/footerIllustration-2.svg";
+const footerIllustration3 = "/assets/images/footerIllustration-3.svg";
+
+  const IMAGES = [footerIllustration1, footerIllustration2, footerIllustration3];
 
 export const ONBOARDING_STEPS = [
     "/onboarding",
@@ -19,26 +24,27 @@ function LayoutOnboardingFooter() {
 
   const isOnBoarded = false;
   const router = useRouter();
-let pathNum = 0;
+    const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
 
-  const handleNext = () => {
-    // If we are not at the last step, go to the next one
-    if (pathNum < ONBOARDING_STEPS.length - 1) {
-      pathNum++;
-      router.push(ONBOARDING_STEPS[pathNum]);
-    } else {
-      // Logic for the final step (e.g., navigate to dashboard)
-      router.push("/dashboard");
-    }
-  };
+    const currentImage =
+      pathNum >= 0 && pathNum < IMAGES.length ? IMAGES[pathNum] : IMAGES[0];
 
-  const handleBack = () => {
-    // Explicitly navigate to the previous step in the list
-    if (pathNum > 0) {
-      pathNum--;
-      router.push(ONBOARDING_STEPS[pathNum]);
-    }
-  };
+    const handleNext = () => {
+      // If we are not at the last step, go to the next one
+      if (pathNum < ONBOARDING_STEPS.length - 1) {
+        router.push(ONBOARDING_STEPS[pathNum + 1]);
+      } else {
+        // Logic for the final step (e.g., navigate to dashboard)
+        router.push("/dashboard");
+      }
+    };
+
+    const handleBack = () => {
+      // Explicitly navigate to the previous step in the list
+      if (pathNum > 0) {
+        router.push(ONBOARDING_STEPS[pathNum - 1]);
+      }
+    };
 
   // Determine if we are on the first step to hide the Back button
   const isFirstStep = pathNum === 0;
@@ -72,7 +78,7 @@ let pathNum = 0;
         {/* Illustration Section */}
         <div className="flex justify-center w-full mb-2">
           <Image
-            src={IMAGES[pathNum]}
+          src={currentImage}
             alt="Footer Illustration"
             width={800}
             height={800}
