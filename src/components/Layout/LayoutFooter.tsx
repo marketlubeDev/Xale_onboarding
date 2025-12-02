@@ -15,9 +15,9 @@ function LayoutFooter() {
           src="/assets/images/footer-illustration.svg"
           alt="Footer Illustration"
           // Make the image visually larger and stretch more across the bottom
-          width={1600}
-          height={350}
-          className="w-full max-w-[1600px] h-auto"
+          width={1500}
+          height={300}
+          className="w-full max-w-[1500px] h-auto"
         />
       </div>
 
