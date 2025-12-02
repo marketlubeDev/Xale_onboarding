@@ -6,6 +6,7 @@ import LayoutOnboardingHeader from "../../../components/Layout/LayoutOnboardingH
 import { useGetPathNum } from "@/src/hooks/useGetPathNum";
 import { useDispatch, useSelector  } from "react-redux";
 import { setIsOnBoarded } from "@/src/lib/features/basicSlice";
+import { OnboardingProvider } from "@/src/context/OnboardingContext";
 
 // Define your onboarding steps in order
 export const ONBOARDING_STEPS = [
@@ -52,21 +53,23 @@ export default function LayoutOnboardWrapper({
   }, [pathNum]);
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-between p-4 font-var(--font-helvetica-neue) relative overflow-hidden bg-var(--body-gradient)"
-      style={{
-        background: "var(--body-gradient)",
-      }}
-    >
-      {isAnimation && pathNum === 0 && !isOnBoarded ? (
-        <OnboardingAnimation />
-      ) : (
-        <>
-          <LayoutOnboardingHeader num={pathNum + 1} />
-          {children}
-          {pathNum !== ONBOARDING_STEPS.length - 1 && <LayoutOnboardingFooter />}
-        </>
-      )}
-    </div>
+    <OnboardingProvider>
+      <div
+        className="min-h-screen flex flex-col items-center justify-between p-4 font-var(--font-helvetica-neue) relative overflow-hidden bg-var(--body-gradient)"
+        style={{
+          background: "var(--body-gradient)",
+        }}
+      >
+        {isAnimation && pathNum === 0 && !isOnBoarded ? (
+          <OnboardingAnimation />
+        ) : (
+          <>
+            <LayoutOnboardingHeader num={pathNum + 1} />
+            {children}
+            {pathNum !== ONBOARDING_STEPS.length - 1 && <LayoutOnboardingFooter />}
+          </>
+        )}
+      </div>
+    </OnboardingProvider>
   );
 }

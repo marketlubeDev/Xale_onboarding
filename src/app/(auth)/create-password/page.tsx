@@ -136,7 +136,7 @@ export default function CreatePasswordPage() {
 
         {/* Form Section */}
         <div className="w-full space-y-6">
-          <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-3">
             {/* Password Field */}
             <LargeInput
               type="password"

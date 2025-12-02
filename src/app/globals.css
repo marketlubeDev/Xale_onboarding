@@ -274,3 +274,8 @@ body {
   transform: translate(-50%, -50%);
   animation: onboarding-anim 3s ease forwards;
 }
+
+
+.group {
+  min-height: 4.4rem;
+}

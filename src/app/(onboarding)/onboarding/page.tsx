@@ -4,28 +4,18 @@ import { Catagory, CompanyIcon } from "@/src/lib/utilities/icons";
 import HeadingGradientTextsGreen from "@/src/components/Texts/HeadingGradientTexts";
 import OnBoardingInputs from "./components/onBoardingInput";
 import OnBoardingDropDown from "../../../components/Layout/OnBoardingDropDown";
-import z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { usePreventBack } from "@/src/hooks/usePreventBack";
 import { useSelector } from "react-redux";
+import { useOnboarding } from "@/src/context/OnboardingContext";
 
-const onBoardingSchema = z.object({
-  companyName: z.string().min(1, "Please enter your company name"),
-  option: z.string().min(1, "Please select a company category"),
-});
 
-type OnboardingFormData = z.infer<typeof onBoardingSchema>;
 
 export default function OnBoarding() {
   usePreventBack();
   const {isOnBoarded } = useSelector( (state: { basic: { isOnBoarded: boolean | null } }) => state.basic);
-  const {
-    register,
-    formState: { errors },
-  } = useForm<OnboardingFormData>({
-    resolver: zodResolver(onBoardingSchema),
-  });
+  const { onBoardingRegister, onBoardingErrors, industryConfigs } =
+  useOnboarding();
+
 
   return (
     <div
@@ -41,16 +31,23 @@ export default function OnBoarding() {
       >
         This helps us to setup your CRM right away
       </p>
-      <OnBoardingInputs
+          <OnBoardingInputs
         Icon={CompanyIcon}
         type="input"
         placeholder="Enter your company name"
-        error={errors.companyName}
-        {...register("companyName", {
+        error={onBoardingErrors.companyName}
+        {...onBoardingRegister("companyName", {
           required: "Company name is required",
         })}
       />
-      <OnBoardingDropDown Icon={Catagory} />
+      <OnBoardingDropDown
+        Icon={Catagory}
+        options={industryConfigs.options}
+        error={onBoardingErrors.category}
+        {...onBoardingRegister("category", {
+          required: "Category is required",
+        })}
+      />
       <div className="h-20 opacity-0">space</div>
     </div>
   );
