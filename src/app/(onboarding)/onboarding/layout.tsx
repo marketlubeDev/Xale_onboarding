@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useState } from "react";
 import LayoutOnboardingFooter from "../../../components/Layout/layoutOnBoardingFooter";
 import OnboardingAnimation from "../../../components/Layout/OnboardingAnimation";
 import LayoutOnboardingHeader from "../../../components/Layout/LayoutOnboardingHeader";
+import { useGetPathNum } from "@/src/hooks/useGetPathNum";
 
 // Define your onboarding steps in order
 export const ONBOARDING_STEPS = [
@@ -20,7 +21,7 @@ export default function LayoutOnboardWrapper({
 }: LayoutOnboardWrapperProps) {
   const [isAnimation, setIsAnimation] = useState(true);
   const isOnBoarded = false;
-
+  const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
   useEffect(() => {
     if (isOnBoarded) return;
     const timeoutId = setTimeout(() => {
@@ -33,7 +34,6 @@ export default function LayoutOnboardWrapper({
     return () => clearTimeout(timeoutId);
   }, []);
 
-  const pathNum = 0;
   useEffect(() => {
     if (pathNum !== 0 && pathNum !== -1 && !isOnBoarded) {
       // Add any redirect or side-effect logic here if needed
