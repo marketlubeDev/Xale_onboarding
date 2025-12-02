@@ -8,11 +8,17 @@ function LayoutFooter() {
     <div className="w-full mt-auto relative z-0">
       {/* Illustration Image Section */}
       <div
-        className="w-[80vw] mb-10 flex justify-center "
-        style={{ margin: "0 auto", marginBottom: "3rem" }}
+        className="w-full mb-6 flex justify-center"
+        style={{ margin: "0 auto", marginBottom: "1.5rem" }}
       >
-        <Image src="/assets/images/footer-illustration.svg" alt="Footer Illustration" width={1000} height={1000} />
-
+        <Image
+          src="/assets/images/footer-illustration.svg"
+          alt="Footer Illustration"
+          // Make the image visually larger and stretch more across the bottom
+          width={1600}
+          height={350}
+          className="w-full max-w-[1600px] h-auto"
+        />
       </div>
 
       {/* Links Section */}

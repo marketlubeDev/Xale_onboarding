@@ -32,8 +32,8 @@ export default function LoginPage() {
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
-
-  const { mutate, isPending } = useMutation({
+  
+  const { mutate , isPending } = useMutation({
     mutationFn: (data: LoginFormData) => {
       return axiosInstance.post("/auth/login", data);
     },
@@ -107,9 +107,10 @@ export default function LoginPage() {
             {/* Submit Button - Black Pill Shape */}
             <PrimaryButton
               type="submit"
+              disabled={isPending}
               style={{ width: "100%" }}
             >
-              Login
+              {isPending ? "Logging in..." : "Login"}
             </PrimaryButton>
 
             <div className="flex justify-center">
