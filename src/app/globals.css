@@ -285,6 +285,11 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   animation: onboarding-anim 3s ease forwards;
+
+  @media (max-width: 768px) {
+    top: 50%;
+    width: 90%;
+  }
 }
 
 
