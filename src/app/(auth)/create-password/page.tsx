@@ -124,7 +124,7 @@ export default function CreatePasswordPage() {
 
   return (
     <LayoutWrapper>
-      <div className="w-full flex flex-col items-center justify-center grow z-10">
+      <div className="w-full max-w-md flex flex-col items-center justify-center grow mt-10 z-10">
         {/* Header Section */}
         <div className="text-center mb-10">
           <HeadingGradientTextsGreen
@@ -135,7 +135,7 @@ export default function CreatePasswordPage() {
         </div>
 
         {/* Form Section */}
-        <div className="w-full space-y-6 max-w-md">
+        <div className="w-full space-y-6">
           <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-3">
             {/* Password Field */}
             <LargeInput

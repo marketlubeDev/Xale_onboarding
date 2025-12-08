@@ -53,7 +53,7 @@ export default function LayoutOnboardWrapper({
   }, [pathNum]);
 
   return (
-    <OnboardingProvider>
+    // <OnboardingProvider>
       <div
         className="min-h-screen flex flex-col items-center justify-between p-4 font-var(--font-helvetica-neue) relative overflow-hidden bg-var(--body-gradient)"
         style={{
@@ -70,6 +70,6 @@ export default function LayoutOnboardWrapper({
           </>
         )}
       </div>
-    </OnboardingProvider>
+    // </OnboardingProvider>
   );
 }

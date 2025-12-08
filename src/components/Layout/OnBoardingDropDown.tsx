@@ -14,7 +14,6 @@ export interface SelectOption {
 interface OnBoardingSelectProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
-  width?: string;
   Icon: React.ElementType;
   options?: SelectOption[];
   error?: FieldError;
@@ -27,7 +26,6 @@ const OnBoardingDropDown = forwardRef<HTMLSelectElement, OnBoardingSelectProps>(
       label = "Select Option",
       className = "",
       containerClassName = "",
-      width = "45rem",
       Icon,
       options = [],
       error,
@@ -81,7 +79,7 @@ const OnBoardingDropDown = forwardRef<HTMLSelectElement, OnBoardingSelectProps>(
     const iconColor = error ? "#ef4444" : "#697571";
 
     return (
-      <div className={`mb-7 ${containerClassName}`} style={{ minWidth: width }}>
+      <div className={`mb-7 w-full max-w-[45rem] ${containerClassName}`} >
         {label && (
           <label className="block text-sm font-medium text-emerald-950 mb-2">
             {label}

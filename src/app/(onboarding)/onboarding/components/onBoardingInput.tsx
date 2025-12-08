@@ -5,7 +5,6 @@ import InputErrorMessage from "@/src/components/Texts/InputErrorMessage";
 interface OnBoardingInputsProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  width?: string; // Controls the container min-width
   Icon?: React.ElementType; // Keeping ElementType so you can pass components like <BuildingIcon />
   error?: FieldError; // React Hook Form error object
   containerClassName?: string;
@@ -18,7 +17,6 @@ const OnBoardingInputs = forwardRef<HTMLInputElement, OnBoardingInputsProps>(
       placeholder = "Enter your company's name",
       className = "",
       containerClassName = "",
-      width = "45rem",
       Icon,
       error,
       type = "text",
@@ -39,7 +37,7 @@ const OnBoardingInputs = forwardRef<HTMLInputElement, OnBoardingInputsProps>(
     const iconColor = error ? "#ef4444" : "#697571"; // Red if error, else Gray
 
     return (
-      <div className={`mb-7 ${containerClassName}`} style={{ minWidth: width }}>
+      <div className={`mb-7 w-full max-w-[45rem] ${containerClassName}`} >
         {label && (
           <label className="block text-sm font-medium text-emerald-950 mb-2">
             {label}
@@ -93,58 +91,4 @@ OnBoardingInputs.displayName = "OnBoardingInputs";
 
 export default OnBoardingInputs;
 
-// ----------------------------------------------------------------------
-// Exporting the Icon separately (as requested in your snippet)
-// ----------------------------------------------------------------------
-export function BuildingIcon({ color = "currentColor" }: { color?: string }) {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2 22H22"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeMiterlimit="10"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M17 2H7C4.93 2 3.25 3.68 3.25 5.75V22H20.75V5.75C20.75 3.68 19.07 2 17 2Z"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeMiterlimit="10"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 14H15"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeMiterlimit="10"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 10H15"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeMiterlimit="10"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M9 6H15"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeMiterlimit="10"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+

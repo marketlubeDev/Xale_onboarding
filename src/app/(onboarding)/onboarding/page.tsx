@@ -13,21 +13,22 @@ import { useOnboarding } from "@/src/context/OnboardingContext";
 export default function OnBoarding() {
   usePreventBack();
   const {isOnBoarded } = useSelector( (state: { basic: { isOnBoarded: boolean | null } }) => state.basic);
-  const { onBoardingRegister, onBoardingErrors, industryConfigs } =
-  useOnboarding();
+  const { onBoardingRegister, onBoardingErrors, industryConfigs } = { onBoardingRegister: (name: string, options: any) => ({}), onBoardingErrors: { companyName: undefined, category: undefined }, industryConfigs: { options: [] } };
+  // useOnboarding();
 
 
   return (
     <div
-      className={`w-full max-w-md flex flex-col items-center justify-center grow mt-10 z-10 ${
+      className={`w-full flex flex-col items-center justify-center grow mt-10 z-10 ${
         !isOnBoarded ? "onboarding-anim-2" : ""
       }`}
     >
       {/* Header Section */}
       <HeadingGradientTextsGreen top="" bottom="Tell us about your company" />
+      
       <p
         style={{ marginTop: "-2rem", marginBottom: "5rem" }}
-        className="text-b2 text-var(--color-text-gray) flex items-center justify-center  text-nowrap"
+        className="text-b2 text-var(--color-text-gray) flex items-center justify-center "
       >
         This helps us to setup your CRM right away
       </p>
