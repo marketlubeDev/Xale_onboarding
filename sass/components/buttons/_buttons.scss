@@ -29,6 +29,11 @@
   /* Padding Default */
   padding: 10px 24px;
 
+  @media (max-width: 768px) {
+    padding: 10px 8px;
+    min-width: 100px;
+  }
+
   /* REMOVED z-index: 1 from here to allow ::before to go behind the background */
 
   /* Hover State */

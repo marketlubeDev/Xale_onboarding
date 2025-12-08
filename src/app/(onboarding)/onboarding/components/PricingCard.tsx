@@ -1,31 +1,29 @@
 import { LightGreenBtn } from "@/src/components/Buttons/LightGreenButton";
 import { PrimaryButton } from "@/src/components/Buttons/PrimaryButton";
+import { useIsMobile } from "@/src/hooks/useMediaQuery"; 
 
 interface PricingCardProps {
-  type?: boolean; // Renamed Boolean to boolean (primitive type is preferred in TS)
+  type?: boolean;
 }
 
 const PricingCard = ({ type = false }: PricingCardProps) => {
+  const isMobile = useIsMobile();
   return (
     <div className="flex items-center justify-center mt-6 plan-card">
-      {/* Main Card Container */}
+
       <div
-        className={`relative w-full max-w-[450px] rounded-[32px] bg-white p-8 shadow-sm transition-all duration-300 
+        className={`relative w-full max-w-[450px] rounded-[32px] bg-white p-1 md:p-8 shadow-sm transition-all duration-300 
           ${type ? "most-popular" : "border border-[#dbece5]"}
         `}
       >
-        {/* 'Most Popular' Badge - Only shows if type is true */}
         {type && <div className="most-popular-tag">Most Popular</div>}
 
-        {/* Header Section */}
         <div className="text-center">
-          <h2 className="text-[17px] font-medium text-[#0f392b] tracking-tight mb-2">
+          <h2 className="text-[17px] font-medium text-[#0f392b] tracking-tight my-2">
             {type ? "Pro Plan" : "Starter Plan"}
           </h2>
 
-          {/* Price Section */}
-          <div className="flex items-center justify-center gap-3">
-            {/* You can make pricing dynamic here too if needed */}
+          <div className="flex items-center justify-center gap-1 md:gap-3 flex-col md:flex-row">
             <span className="text-[3rem]  font-medium text-gray-400 line-through decoration-1 decoration-gray-400/80">
               ₹899
             </span>
@@ -41,29 +39,25 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
           </p>
         </div>
 
-        {/* Dashed Divider */}
         <div className="my-7 w-full border-t border-dashed border-gray-300/80"></div>
 
-        {/* Button */}
-        <div className="mb-8">
+        <div className="mb-8 flex items-center justify-center">
           {type ? (
             <PrimaryButton
-              style={{ width: "100%", height: "50px", fontSize: "16px" }}
+              style={{ width: isMobile ? "90%" : "100%", height: "50px", fontSize: "16px" }}
             >
               Start free trial
             </PrimaryButton>
           ) : (
             <LightGreenBtn
-              style={{ width: "100%", height: "50px", fontSize: "16px" }}
+              style={{ width: isMobile ? "90%" : "100%", height: "50px", fontSize: "16px" }}
             >
               Start free trial
             </LightGreenBtn>
           )}
         </div>
 
-        {/* Features List */}
-        <div className="flex flex-col items-center space-y-[18px]">
-          {/* Active Item 1 */}
+        <div className="flex flex-col items-center justify-center space-y-[18px]">
           <div className="flex items-center gap-3 w-full justify-center">
             <div className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#133d30] text-white">
               {/* <Check size={12} strokeWidth={4} /> */}
@@ -73,7 +67,6 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
             </span>
           </div>
 
-          {/* Active Item 2 */}
           <div className="flex items-center gap-3 w-full justify-center">
             <div className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#133d30] text-white">
               {/* <Check size={12} strokeWidth={4} /> */}
@@ -83,7 +76,6 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
             </span>
           </div>
 
-          {/* Item 3 - Conditional Check */}
           <div className="flex items-center gap-3 w-full justify-center">
             <div
               className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full ${
@@ -92,7 +84,6 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
                   : "border border-gray-300 text-gray-300"
               }`}
             >
-              {/* Icon goes here */}
             </div>
             <span
               className={`text-[15px] ${
@@ -105,7 +96,6 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
             </span>
           </div>
 
-          {/* Item 4 */}
           <div className="flex items-center gap-3 w-full justify-center">
             <div
               className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full ${
@@ -114,7 +104,6 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
                   : "border border-gray-300 text-gray-300"
               }`}
             >
-              {/* Icon goes here */}
             </div>
             <span
               className={`text-[15px] ${
@@ -127,7 +116,6 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
             </span>
           </div>
 
-          {/* Item 5 */}
           <div className="flex items-center gap-3 w-full justify-center">
             <div
               className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full ${
@@ -136,7 +124,6 @@ const PricingCard = ({ type = false }: PricingCardProps) => {
                   : "border border-gray-300 text-gray-300"
               }`}
             >
-              {/* Icon goes here */}
             </div>
             <span
               className={`text-[15px] ${

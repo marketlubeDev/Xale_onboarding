@@ -32,6 +32,8 @@ export default function OnBoarding() {
       >
         This helps us to setup your CRM right away
       </p>
+
+      <div className="w-full px-0 md:px-[5rem] flex justify-center flex-col items-center">
           <OnBoardingInputs
         Icon={CompanyIcon}
         type="input"
@@ -49,6 +51,7 @@ export default function OnBoarding() {
           required: "Category is required",
         })}
       />
+      </div>
       <div className="h-20 opacity-0">space</div>
     </div>
   );

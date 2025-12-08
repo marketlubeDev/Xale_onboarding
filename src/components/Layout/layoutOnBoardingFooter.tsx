@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import LinkSection from "@/src/components/footer/LinkSection";
 import Image from "next/image";
 import { useGetPathNum } from "@/src/hooks/useGetPathNum";
+import { useMediaQuery } from "@/src/hooks/useMediaQuery";
 
 const footerIllustration1 = "/assets/images/footerIllustration-1.svg";
 const footerIllustration2 = "/assets/images/footerIllustration-2.svg";
@@ -26,27 +27,25 @@ function LayoutOnboardingFooter() {
   const router = useRouter();
     const { pathNum } = useGetPathNum(ONBOARDING_STEPS);
 
+    const isMobileOrTablet = useMediaQuery("(max-width: 1024px)");
+
     const currentImage =
       pathNum >= 0 && pathNum < IMAGES.length ? IMAGES[pathNum] : IMAGES[0];
 
     const handleNext = () => {
-      // If we are not at the last step, go to the next one
       if (pathNum < ONBOARDING_STEPS.length - 1) {
         router.push(ONBOARDING_STEPS[pathNum + 1]);
       } else {
-        // Logic for the final step (e.g., navigate to dashboard)
         router.push("/dashboard");
       }
     };
 
     const handleBack = () => {
-      // Explicitly navigate to the previous step in the list
       if (pathNum > 0) {
         router.push(ONBOARDING_STEPS[pathNum - 1]);
       }
     };
 
-  // Determine if we are on the first step to hide the Back button
   const isFirstStep = pathNum === 0;
 
   return (
@@ -56,16 +55,19 @@ function LayoutOnboardingFooter() {
       }`}
     >
       <div
-        className="w-[90vw] m-auto grid grid-cols-3 items-end gap-8 mb-10 px-6"
-        style={{ gridTemplateColumns: "1fr auto 1fr" }}
+        className={`w-[90vw] m-auto mb-10 px-4 sm:px-6 ${
+          isMobileOrTablet
+            ? "flex flex-row items-center justify-between gap-4"
+            : "grid grid-cols-3 items-end gap-8"
+        }`}
+        style={!isMobileOrTablet ? { gridTemplateColumns: "1fr auto 1fr" } : {}}
       >
-        {/* Back Button Section */}
-        <div className="flex justify-start">
+        <div className={`flex ${isMobileOrTablet ? "justify-start" : "justify-start"}`}>
           <LightGreenBtn
             style={{
-              width: "15rem",
+              width: isMobileOrTablet ? "auto" : "15rem",
+              minWidth: isMobileOrTablet ? "120px" : "15rem",
               opacity: isFirstStep ? "0" : "1",
-              // Critical: prevent clicking when hidden
               pointerEvents: isFirstStep ? "none" : "auto",
             }}
             Icon={LeftArrowIcon}
@@ -75,32 +77,34 @@ function LayoutOnboardingFooter() {
           </LightGreenBtn>
         </div>
 
-        {/* Illustration Section */}
-        <div className="flex justify-center w-full mb-2">
-          <Image
-          src={currentImage}
-            alt="Footer Illustration"
-            width={800}
-            height={800}
-            className="h-auto object-contain"
-            style={{ maxWidth: "100%", maxHeight: "800px" }}
-          />
-        </div>
+        {!isMobileOrTablet && (
+          <div className="flex justify-center w-full mb-2">
+            <Image
+              src={currentImage}
+              alt="Footer Illustration"
+              width={800}
+              height={800}
+              className="h-auto object-contain"
+              style={{ maxWidth: "100%", maxHeight: "800px" }}
+            />
+          </div>
+        )}
 
-        {/* Continue Button Section */}
-        <div className="flex justify-end">
+
+        <div className={`flex ${isMobileOrTablet ? "justify-end" : "justify-end"}`}>
           <PrimaryButton
-            style={{ width: "15rem" }}
+            style={{ 
+              width: isMobileOrTablet ? "auto" : "15rem",
+              minWidth: isMobileOrTablet ? "7.5rem" : "15rem"
+            }}
             onClick={handleNext}
             Icon={RightArrowIcon}
           >
-            {/* Change text if it's the last step (optional) */}
             {pathNum === ONBOARDING_STEPS.length - 1 ? "Finish" : "Continue"}
           </PrimaryButton>
         </div>
       </div>
 
-      {/* Links Section */}
       <LinkSection />
     </div>
   );

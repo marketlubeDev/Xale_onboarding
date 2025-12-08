@@ -6,7 +6,6 @@ interface ImageUploadProps {
   label?: string;
   onFileSelect?: (file: File) => void;
   className?: string;
-  width?: string;
   height?: string; // Added height prop
   acceptedFormats?: string; // e.g. ".png, .jpg, .jpeg, .webp"
 }
@@ -15,7 +14,6 @@ export default function ImageUpload({
   label = "Company logo",
   onFileSelect,
   className = "",
-  width = "45rem",
   height = "8rem", // Default to h-40 equivalent (160px)
   acceptedFormats = ".png, .jpg, .jpeg, .webp",
 }: ImageUploadProps) {
@@ -64,8 +62,7 @@ export default function ImageUpload({
 
   return (
     <div
-      className={`w-full max-w-4xl ${className} mb-8`}
-      style={{ minWidth: width }}
+      className={`w-full max-w-[45rem] ${className} mb-8`}
     >
       <label className="block text-sm font-medium text-emerald-950 mb-3">
         {label}

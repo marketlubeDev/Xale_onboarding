@@ -25,7 +25,7 @@ export default function SelectPlan() {
       {/* Top Section: Header & Toggle */}
       <div className="flex flex-col items-center shrink-0">
         <HeadingGradientTextsGreen top="" bottom="Choose Your Plan" />
-        <p className="text-b2 text-[var(--color-text-gray)] flex items-center justify-center text-nowrap mt-[-2rem] mb-8">
+        <p className="text-b2 text-[var(--color-text-gray)] flex items-center justify-center mt-[-2rem] mb-8">
           Pick a plan that fits your companies needs. Don't Worry - you can
           always upgrade later
         </p>
@@ -45,13 +45,13 @@ export default function SelectPlan() {
       {/* Bottom Section: Footer 
           Changed w-[100vw] to w-full to prevent horizontal scrollbar.
       */}
-      <div className="flex justify-center items-end h-[4rem] w-full shrink-0 text-b2">
+      <div className="flex justify-center items-end h-[4rem] w-full shrink-0 text-b2 flex-col md:flex-row items-center mt-2 md:mt-0">
         Facing an issue while choosing plan?.
         <a
           href="mailto:support@xale.com"
           className="underline ml-2 cursor-pointer text-black"
         >
-          Contact Us
+          Contact Us 
         </a>
       </div>
     </div>
