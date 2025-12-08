@@ -14,12 +14,12 @@ export default function HeadingGradientTextsGreen({
   gradientClass = "",
 }: HeadingGradientTextsProps) {
   return (
-    <div className="text-center mb-10" style={style}>
+    <div className="text-center mb-10 flex flex-col items-center gap-2" style={style}>
       <h2 className="text-h1-narrow font-medium text-color-black-10 tracking-tight">
         {top}
       </h2>
       <h2
-        className={`-mt-4 text-h1-narrow bg-clip-text text-transparent text-nowrap ${gradientClass}`}
+        className={`-mt-4 text-h1-narrow bg-clip-text text-transparent md:text-nowrap  ${gradientClass}`}
         style={{
           backgroundImage: gradient,
           WebkitBackgroundClip: "text",

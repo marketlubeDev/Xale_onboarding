@@ -3,6 +3,7 @@
 import React, { forwardRef, useState, useEffect } from "react";
 import { type FieldError } from "react-hook-form";
 import InputErrorMessage from "@/src/components/Texts/InputErrorMessage";
+import { ChevronDownIcon } from "@/src/lib/utilities/icons";
 
 // Define the shape of an option
 export interface SelectOption {
@@ -41,12 +42,6 @@ const OnBoardingDropDown = forwardRef<HTMLSelectElement, OnBoardingSelectProps>(
     const figmaShadow =
       "0px 144px 40px 0px rgba(0, 0, 0, 0.00), 0px 92px 37px 0px rgba(0, 0, 0, 0.00), 0px 52px 31px 0px rgba(0, 0, 0, 0.01), 0px 23px 23px 0px rgba(0, 0, 0, 0.02), 0px 6px 13px 0px rgba(0, 0, 0, 0.02)";
 
-    // -------------------------------------------------------------------------
-    // Local State for Styling
-    // -------------------------------------------------------------------------
-    // We need to track the value locally to toggle text color (Gray vs Black)
-    // because standard React Hook Form 'register' does not pass the 'value' prop back,
-    // causing the component to remain "uncontrolled" and unaware of changes.
     const [currentValue, setCurrentValue] = useState<
       string | number | readonly string[]
     >(
@@ -133,13 +128,13 @@ const OnBoardingDropDown = forwardRef<HTMLSelectElement, OnBoardingSelectProps>(
             </option>
 
             {/* Mapped Options */}
-            {options.map((option) => (
+            {options?.map((option) => (
               <option
-                key={option.value}
-                value={option.value}
+                key={option?.value}
+                value={option?.value}
                 className="text-gray-900"
               >
-                {option.label}
+                {option?.label}
               </option>
             ))}
           </select>
@@ -162,23 +157,4 @@ OnBoardingDropDown.displayName = "OnBoardingDropDown";
 export default OnBoardingDropDown;
 
 // Helper Icon
-function ChevronDownIcon() {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M19.9201 8.9502L13.4001 15.4702C12.6301 16.2402 11.3701 16.2402 10.6001 15.4702L4.08008 8.9502"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeMiterlimit="10"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+

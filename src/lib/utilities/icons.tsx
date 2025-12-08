@@ -287,12 +287,38 @@ export function ChevronRightIcon({
       width={size}
       height={size}
       viewBox="0 0 20 20"
-      fill="none"
+      fill={color}
     >
       <path
         d="M7.5 4.5L12.5 9.5L7.5 14.5"
         stroke={color}
         strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function ChevronDownIcon({
+  color = "var(--color-black-5)",
+  size = 20,
+  className,
+}: IconProps): React.ReactElement {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill={color}
+    >
+      <path
+        d="M19.9201 8.9502L13.4001 15.4702C12.6301 16.2402 11.3701 16.2402 10.6001 15.4702L4.08008 8.9502"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

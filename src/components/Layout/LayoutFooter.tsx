@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function LayoutFooter() {
   return (
-    <div className="w-full mt-auto relative z-0">
+    <div className="w-full mt-auto relative z-0 ">
       {/* Illustration Image Section */}
       <div
         className="w-full mb-6 flex justify-center"
@@ -17,7 +17,7 @@ function LayoutFooter() {
           // Make the image visually larger and stretch more across the bottom
           width={1500}
           height={300}
-          className="w-full max-w-[1500px] h-auto"
+          className="w-full max-w-[1500px] h-auto hidden md:block"
         />
       </div>
 

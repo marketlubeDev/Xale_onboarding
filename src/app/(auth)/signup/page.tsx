@@ -67,16 +67,15 @@ export default function SignupPage() {
   return (
     <LayoutWrapper>
       {/* Main Content Content Wrapper */}
-      <div className="w-full max-w-md flex flex-col items-center justify-center grow mt-10 z-10">
+      <div className="w-full flex flex-col items-center justify-center grow z-10">
         {/* Header Section */}
         <HeadingGradientTextsGreen
           top="Hey there"
           bottom="Let's get you into your CRM"
-          style={{ marginBottom: "5rem" }}
         />
 
         {/* Form Section */}
-        <div className="w-full space-y-6">
+        <div className="w-full space-y-6 max-w-md">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* Email Field */}
             <LargeInput

@@ -69,7 +69,6 @@ export default function OTPPage() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
 
-  console.log(otpArray , "otpArray");
 
   const {
     handleSubmit,
@@ -205,7 +204,7 @@ export default function OTPPage() {
 
   return (
     <LayoutWrapper>
-      <div className="w-full max-w-lg mb-[5rem] flex flex-col items-center justify-center grow mt-10 z-10">
+      <div className="w-full flex flex-col items-center justify-center grow z-10">
 
         {/* Header Section */}
         <HeadingGradientTextsGreen
@@ -214,18 +213,22 @@ export default function OTPPage() {
           gradient="var(--gradient-text-gray)"
         />
 
-        <p
+        <div
           style={{ marginTop: "-2rem", marginBottom: "5rem" }}
-          className="text-b2 text-var(--color-text-gray) flex items-center justify-center"
+          className="text-b2 text-var(--color-text-gray) flex items-center justify-center flex-col md:flex-row"
         >
+          <span>
           We sent a 6-digit code to
+          </span>
+          <span>
           <Link href={"/sign-up"} className="text-b2-bold underline ml-1">
-            {user?.email}
-          </Link>
-        </p>
+              {user?.email}
+            </Link>
+          </span>
+        </div>
 
         {/* OTP Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col items-center space-y-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col items-center space-y-8 max-w-md">
 
           {/* OTP Inputs */}
           <div className="flex flex-col w-full">
